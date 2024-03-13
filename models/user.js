@@ -8,6 +8,7 @@ const userSchema = new mongoose.Schema({
     email: {
         type: String,
         required: true,
+        unique: true
     },
     password: {
         type: String,
@@ -36,6 +37,16 @@ userSchema.virtual('id').get(function () {
 
 userSchema.set('toJSON', {
     virtuals: true,
+});
+//đk email
+userSchema.virtual('emailExists').get(async function () {
+    try {
+        const existingUser = await User.findOne({ email: this.email });
+        return !!existingUser; // Trả về true nếu email đã tồn tại, ngược lại trả về false
+    } catch (error) {
+        console.error('Error checking email existence:', error);
+        return false;
+    }
 });
 
 exports.User = mongoose.model('User', userSchema);

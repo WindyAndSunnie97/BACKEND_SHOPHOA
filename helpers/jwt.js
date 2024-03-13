@@ -1,4 +1,4 @@
-// const expressJwt = require('express-jwt');
+// const expressJwt = require('     ');
 
 // function authJwt() {
 //     const secret = process.env.secret;
@@ -10,7 +10,7 @@
 //     }).unless({
 //         path: [
 //             {url: /\/public\/uploads(.*)/ , methods: ['GET', 'OPTIONS'] },
-//             {url: /\/api\/Flowershop\/products(.*)/ , methods: ['GET', 'OPTIONS'] },
+//             {url: /\/api\/Flowershop\/product(.*)/ , methods: ['GET', 'OPTIONS'] },
 //             {url: /\/api\/Flowershop\/categories(.*)/ , methods: ['GET', 'OPTIONS'] },
 //             {url: /\/api\/Flowershop\/orders(.*)/,methods: ['GET', 'OPTIONS', 'POST']},
 //             `${api}/users/login`,

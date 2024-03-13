@@ -22,22 +22,26 @@ router.get('/:id', async(req,res)=>{
     res.status(200).send(user);
 })
 
-router.post('/', async (req,res)=>{
-    let user = new User({
-        name: req.body.name,
-        email: req.body.email,
-        passwordHash: bcrypt.hashSync(req.body.password, 10),
-        phone: req.body.phone,
-        isAdmin: req.body.isAdmin,
-        accountname: req.body.accountname
-    })
-    user = await user.save();
+router.post('/', async (req, res) => {
+    const {name, email, password, phone, isAdmin, accountname} = req.body
+    const emailExists = await User.findOne({email: email});
+    if(!emailExists){
+        const user = await User.create({
+            name: name,
+            email: email,
+            password: bcrypt.hashSync(password, 10),
+            phone: phone,
+            isAdmin: isAdmin,
+            accountname: accountname
+        })
+        res.status(200).json(user);
+    } else {
+        res.status(500).json({message: "Email exists"})
+    }
 
-    if(!user)
-    return res.status(400).send('the user cannot be created!')
+});
 
-    res.send(user);
-})
+
 
 router.put('/:id',async (req, res)=> {
 
@@ -54,7 +58,7 @@ router.put('/:id',async (req, res)=> {
         {
             name: req.body.name,
             email: req.body.email,
-            passwor: newPassword,
+            password: newPassword,
             phone: req.body.phone,
             isAdmin: req.body.isAdmin,
             accountname: req.body.accountname

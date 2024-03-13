@@ -1,19 +1,3 @@
-
-// const mongoose = require('mongoose');
-
-// const productSchema = mongoose.Schema({
-//     name: String,
-//     price: String,
-//     imageUrl: String,
-//     idCategogy: String,
-//     Description: String,
-//     isFavourite:String
-    
-// })
-
-// exports.Product = mongoose.model('Product',productSchema );
-
-
 const mongoose = require('mongoose');
 
 const productSchema = mongoose.Schema({
@@ -21,6 +5,7 @@ const productSchema = mongoose.Schema({
         type: String,
         required: true,
         unique: true
+        
     },
     description: {
         type: String,
